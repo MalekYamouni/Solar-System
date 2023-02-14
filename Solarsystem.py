@@ -117,37 +117,39 @@ class Spritesheet(pygame.sprite.Sprite):
 #################################################################################################################
 
 def main():
-    # Werte der Sonne
-    SR = 200
-    SG = 100
-    SB = 0
-    Ssize = 70
-    Sunparts = []
-    # 10 RGB Schichten um die Sonne besser darzustellen / wird noch geändert
-    for i in range(10):
-        Sonne = planeten(sz/2,sz/2, 0, Ssize, (SR, SG, SB),0,0,0)
-        Sunparts.append(Sonne)
-        SR += 5
-        SG += 5
-        SB += 10
-        Ssize -= 7
+    Sonne = planeten(sz/2,sz/2, 0, 70, (200, 100, 0),0,0,0)
+ 
 
-    # Image wird geladen und in eine Variable gepackt
+    # Image Erde wird geladen und in eine Variable gepackt
     sprite_sheet_image = pygame.image.load('earth.png').convert_alpha()
-    sprite_sheet = Spritesheet(sprite_sheet_image)
+    sprite_sheet_earth = Spritesheet(sprite_sheet_image)
+
+    # Image Sonne wird geladen und in eine Variable gepackt
+    sprite_sheet_image = pygame.image.load('Sun.png').convert_alpha()
+    sprite_sheet_sun = Spritesheet(sprite_sheet_image)
 
     # Hintergrund
     BLACK = (0,0,0)
 
-    #create animation list
-    animation_list = []
-    animation_steps = 48
-    last_update = pygame.time.get_ticks()
-    animation_cooldown = 50
-    frame = 0
+    # Animation Sonne
+    animation_list_sun = []
+    animation_steps_sun = 11
+    last_update_sun = pygame.time.get_ticks()
+    animation_cooldown_sun = 90
+    frame_sun = 0
 
-    for x in range(animation_steps):
-       animation_list.append(sprite_sheet.get_image(x, 96, 96, 2, BLACK))
+    # Animation Erde
+    animation_list_earth = []
+    animation_steps_earth = 48
+    last_update_earth = pygame.time.get_ticks()
+    animation_cooldown_earth = 50
+    frame_earth = 0
+
+    for x in range(animation_steps_earth):
+       animation_list_earth.append(sprite_sheet_earth.get_image(x, 96, 96, 2, BLACK))
+
+    for x in range(animation_steps_sun):
+        animation_list_sun.append(sprite_sheet_sun.get_image(x, 96, 96, 1, BLACK))
 
     # Erde Objekt
     Erde = planeten(sz/2-50, sz/2-50, 0.001, 15, "green", 23.5, 23.5, 1)
@@ -158,8 +160,6 @@ def main():
     waitcounter = 0
     # Schweifliste
     starchain = []
-    # Hintergrund des Mainfensters
-    BG = (0,0,0)
     
     while True:
         
@@ -167,19 +167,28 @@ def main():
             if event.type == pygame.QUIT:
                 return
         #update background
-        display.fill(BG)
+        display.fill((0,0,0))
 
         
-        #update animation
-        current_time = pygame.time.get_ticks()
-        if current_time - last_update >= animation_cooldown:
-            frame += 1
-            last_update = current_time
-            if frame >= len(animation_list):
-                frame = 0
+        #update animation earth
+        current_time_earth = pygame.time.get_ticks()
+        if current_time_earth - last_update_earth >= animation_cooldown_earth:
+            frame_earth += 1
+            last_update_earth = current_time_earth
+            if frame_earth >= len(animation_list_earth):
+                frame_earth = 0
+
+        # update animation sun
+        current_time_sun = pygame.time.get_ticks()
+        if current_time_sun - last_update_sun >= animation_cooldown_sun:
+            frame_sun += 1
+            last_update_sun = current_time_sun
+            if frame_sun >= len(animation_list_sun):
+                frame_sun = 0
+
+        
 
 
-       
         # Anzahl der Sterne die Random erzeugt werden
         if len(starsi)<200:
             if waitcounter>20:
@@ -209,11 +218,8 @@ def main():
                 del starchain[0]
 
          # show frame image
-        display.blit(animation_list[frame],(Erde.getx()-24,Erde.gety()-24))
-
-        # Sonnenschichten werden gezeichnet
-        for i in Sunparts:
-            i.drawstatic()
+        display.blit(animation_list_earth[frame_earth],(Erde.getx()-24,Erde.gety()-24))
+        display.blit(animation_list_sun[frame_sun],((sz/2)-48,(sz/2)-48))
 
         pygame.display.update()
         clock.tick(FPS)

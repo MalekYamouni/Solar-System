@@ -2,6 +2,8 @@ import pygame
 import random
 import sprite
 from planet import planeten
+from Image import Spritesheet
+from Stars import stars
 
 pygame.init()
 
@@ -15,76 +17,6 @@ pygame.display.set_caption("Sonnensystem")
 FPS = 120
 # Beschleunigung
 ACCELERATION = 0.1
-        
-#################################################################################################################
-
-class stars:
-    def __init__(self, x, y, radius, angle,starttime,v):
-        self.x = x
-        self.y = y
-        self.radius = radius
-        self.angle = angle
-        self.time = starttime
-        self.R = 0
-        self.G = 0
-        self.B = 0
-        self.R1 = 255
-        self.G1 = 255
-        self.B1 = 255
-        self.v = v
-        self.devider = 1*self.v*255*2
-
-    def drawline(self):
-        pygame.draw.circle(display, color=(self.R1,self.G1,self.B1), center=(self.x,self.y),radius=self.radius)
-        
-
-    def drawstar(self):
-        pygame.draw.circle(display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
-
-    def timer(self):
-        if self.time>=0:
-            self.time -= self.v
-
-        else:
-            self.time = 1
-            self.x = random.randint(1,1000)
-            self.y = random.randint(1,1000)
-
-    def bright(self):
-        if self.time > 0.5 and self.R< 250:
-            self.R += self.devider
-            self.G += self.devider
-            self.B += self.devider
-        elif self.R > 5:
-            self.R -= self.devider
-            self.G -= self.devider
-            self.B -= self.devider
-
-    def bright2(self):
-        if self.R1> 0:
-            self.R1 -= 0.4
-            self.G1 -= 0.4
-            self.B1 -= 0.4
-
-#################################################################################################################
-
-class Spritesheet(pygame.sprite.Sprite):
-    def __init__(self,image) -> None:
-        super().__init__()
-        self.sheet = image
-        
-
-    def get_image(self, frame, width, height, scale, colour):
-        image = pygame.Surface((width,height)).convert_alpha()
-        # bild, Koordinaten, area vom Sheet Koordinaten
-        image.blit(self.sheet, (0,0), (0,frame*height, width, height))
-        #größe ändern
-        image = pygame.transform.scale(image,(width/scale, height/scale))
-        #transparenz
-        image.set_colorkey(colour) 
-        return image
-        
-#################################################################################################################
 
 def main():
     # Sonne Objekt
@@ -123,8 +55,6 @@ def main():
     for x in range(animation_steps_sun):
         animation_list_sun.append(sprite_sheet_sun.get_image(x, 96, 96, 1, BLACK))
 
-    
-
     # Sterneliste
     starsi = []
     # Sternedelay Zähler
@@ -157,13 +87,11 @@ def main():
             if frame_sun >= len(animation_list_sun):
                 frame_sun = 0
 
-        
-
 
         # Anzahl der Sterne die Random erzeugt werden
         if len(starsi)<200:
             if waitcounter>20:
-                star = stars(random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001)
+                star = stars(display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001)
                 starsi.append(star)
                 waitcounter = 0
             else:
@@ -177,7 +105,7 @@ def main():
 
         
         # Schweif hat die Werte des Erde2 Objekt
-        Erde2 = stars(Erde.getx(), Erde.gety(), 1, 30, 5,5)
+        Erde2 = stars(display,Erde.getx(), Erde.gety(), 1, 30, 5,5)
         starchain.append(Erde2)
 
         # Schweif wird gezeichnet, Helligkeit sinkt auf 0 und Objekt wird gelöscht

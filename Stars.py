@@ -20,10 +20,6 @@ class stars:
         self.liste = liste
         self.counter = counter
 
-    def drawline(self):
-        pygame.draw.circle(self.display, color=(self.R1,self.G1,self.B1), center=(self.x,self.y),radius=self.radius)
-        
-
     def drawstar(self):
         pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
 

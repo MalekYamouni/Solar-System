@@ -19,8 +19,8 @@ FPS = 120
 
 def main():
     # Planeten Objekte
-    Sonne = planeten(display,SCREENSIZE/2, SCREENSIZE/2, 0, 70, (200, 100, 0),0,0,0, SCREENSIZE)
-    Erde = planeten(display,SCREENSIZE/2-50, SCREENSIZE/2-50, 0.001, 15, "green", 23.5, 23.5, 1, SCREENSIZE)
+    #Sonne = planeten(display,SCREENSIZE/2, SCREENSIZE/2, 0, 70, (200, 100, 0),0,0,0, SCREENSIZE)
+    #Erde = planeten(display,SCREENSIZE/2-50, SCREENSIZE/2-50, 0.001, 15, "green", 23.5, 23.5, 1, SCREENSIZE)
 
     # Images werden geladen und in eine Variable gepackt
     sprite_sheet_image = pygame.image.load('earth.png').convert_alpha()
@@ -41,7 +41,7 @@ def main():
 
     star = stars(display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001,[],0)
 
-    earthtail = Tail(display,[],1, 30, 5, 5,(SCREENSIZE/2)-48, (SCREENSIZE/2)-48 , SCREENSIZE)
+    earthtail = Tail(display,[],1, 30, SCREENSIZE/2, SCREENSIZE/2, SCREENSIZE, 0)
     
 
     while True:
@@ -56,27 +56,15 @@ def main():
         sun.update()
         earth.update()
 
-        # Anzahl der Sterne die Random erzeugt werden
+        # Sterne werden Random erzeugt
         star.drawstars()
-        
 
-        # Schweif hat die Werte des Erde2 Objekt
-        #Erde2 = stars(display,Erde.getx(), Erde.gety(), 1, 30, 5,5)
+        # erzeugt den Schweif hinter dem Planeten
+        earthtail.drawtail2()
 
-        #starchain.append(Erde2)
-
-        # Schweif wird gezeichnet, Helligkeit sinkt auf 0 und Objekt wird gelöscht
-        # for i in starchain:
-        #     i.drawline()
-        #     i.bright2()
-        #     if i.R1 < 1:
-        #         del starchain[0]
-        earthtail.drawparticle()
-        earthtail.drawtail()
-
-        #show frame image
+        # visualisiert die Objekte
         sun.showstatic()
-        earth.showmoving()
+        #earth.showmoving()
 
         pygame.display.update()
         clock.tick(FPS)

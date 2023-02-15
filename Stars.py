@@ -2,7 +2,7 @@ import pygame
 import random
 
 class stars:
-    def __init__(self,display, x, y, radius, angle,starttime,v):
+    def __init__(self,display, x, y, radius, angle,starttime,v, liste, counter):
         self.x = x
         self.y = y
         self.radius = radius
@@ -17,6 +17,8 @@ class stars:
         self.v = v
         self.devider = 1*self.v*255*2
         self.display = display
+        self.liste = liste
+        self.counter = counter
 
     def drawline(self):
         pygame.draw.circle(self.display, color=(self.R1,self.G1,self.B1), center=(self.x,self.y),radius=self.radius)
@@ -44,8 +46,17 @@ class stars:
             self.G -= self.devider
             self.B -= self.devider
 
-    def bright2(self):
-        if self.R1> 0:
-            self.R1 -= 0.4
-            self.G1 -= 0.4
-            self.B1 -= 0.4
+    def drawstars(self):
+        if len(self.liste)<200:
+            if self.counter>20:
+                star = stars(self.display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001,[],0)
+                self.liste.append(star)
+                self.counter = 0
+            else:
+                self.counter += 1
+                
+        # Sterne werden gezeichnet haben einen timer, wenn timer 0 erreicht wird das Objekt gelöscht
+        for star in self.liste:
+            star.drawstar()
+            star.timer()
+            star.bright()

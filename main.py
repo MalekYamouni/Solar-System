@@ -31,6 +31,7 @@ def main():
 
     # Hintergrund
     BLACK = (0,0,0)
+
     # Animation 
     sun = Animation(display, [], 11, 90, 0, sprite_sheet_sun, 1, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
     sun.animate()
@@ -38,15 +39,11 @@ def main():
     earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 23.5, SCREENSIZE)
     earth.animate()
 
-    # Sterneliste
-    starsi = []
-    # Sternedelay Zähler
-    waitcounter = 0
-    # Schweifliste
-    starchain = []
+    star = stars(display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001,[],0)
 
-    tail = Tail(display,[],1, 30, 5, 5)
+    earthtail = Tail(display,[],1, 30, 5, 5,(SCREENSIZE/2)-48, (SCREENSIZE/2)-48 , SCREENSIZE)
     
+
     while True:
         
         for event in pygame.event.get():
@@ -60,22 +57,11 @@ def main():
         earth.update()
 
         # Anzahl der Sterne die Random erzeugt werden
-        if len(starsi)<200:
-            if waitcounter>20:
-                star = stars(display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001)
-                starsi.append(star)
-                waitcounter = 0
-            else:
-                waitcounter += 1
-
-        # Sterne werden gezeichnet haben einen timer, wenn timer 0 erreicht wird das Objekt gelöscht
-        for star in starsi:
-            star.drawstar()
-            star.timer()
-            star.bright()
+        star.drawstars()
+        
 
         # Schweif hat die Werte des Erde2 Objekt
-        Erde2 = stars(display,Erde.getx(), Erde.gety(), 1, 30, 5,5)
+        #Erde2 = stars(display,Erde.getx(), Erde.gety(), 1, 30, 5,5)
 
         #starchain.append(Erde2)
 
@@ -85,8 +71,8 @@ def main():
         #     i.bright2()
         #     if i.R1 < 1:
         #         del starchain[0]
-
-        tail.drawtail()
+        earthtail.drawparticle()
+        earthtail.drawtail()
 
         #show frame image
         sun.showstatic()

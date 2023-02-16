@@ -19,22 +19,22 @@ FPS = 120
 
 def main():
     # Images werden geladen und in eine Variable gepackt
-    sprite_sheet_image = pygame.image.load('earth.png').convert_alpha()
+    sprite_sheet_image = pygame.image.load('Sonnensystem/earth.png').convert_alpha()
     sprite_sheet_earth = Spritesheet(sprite_sheet_image)
 
-    sprite_sheet_image = pygame.image.load('Sun.png').convert_alpha()
+    sprite_sheet_image = pygame.image.load('Sonnensystem/Sun.png').convert_alpha()
     sprite_sheet_sun = Spritesheet(sprite_sheet_image)
 
     # Animation Objekte
     sun = Animation(display, [], 11, 90, 0, sprite_sheet_sun, 1, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
     sun.animate()
 
-    earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 23.5, SCREENSIZE)
+    earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
     earth.animate()
 
     star = stars(display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001,[],0)
 
-    earthtail = Tail(display,[],1, 30, SCREENSIZE/2, SCREENSIZE/2, SCREENSIZE, 0)
+    earthTail = Tail()
     
 
     while True:
@@ -53,12 +53,14 @@ def main():
         star.drawstars()
 
         # erzeugt den Schweif hinter dem Planeten
+        earthTail.newParticle(display, SCREENSIZE)
+        earthTail.update()
         #earthtail.drawparticle()
-        earthtail.drawtail2()
+        # earthtail.drawtail2()
 
         # visualisiert die Objekte
         sun.showstatic()
-        #earth.showmoving()
+        earth.showmoving()
 
         pygame.display.update()
         clock.tick(FPS)

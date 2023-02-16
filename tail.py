@@ -4,7 +4,7 @@ import math
 class TailParticle:
 
 
-    def __init__(self,display, taillist, radius, angle, SCREENSIZE, counter) -> None:
+    def __init__(self, display, radius, angle, SCREENSIZE):
         self.taillist = taillist
         self.radius = radius
         self.angle = angle
@@ -48,7 +48,7 @@ class Tail:
                 del self.particles[0]
 
     def newParticle(self, display, SCREENSIZE):
-        particle = TailParticle(display,[],1, self.angle, SCREENSIZE, 0)
+        particle = TailParticle(display, 1, self.angle, SCREENSIZE)
         self.particles.append(particle)
         self.updateAngle()  
 

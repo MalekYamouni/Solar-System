@@ -1,23 +1,20 @@
 import pygame
-import random
+from random import randint
 
 class stars:
-    def __init__(self,display, x, y, radius, angle,starttime,v, liste, counter):
+    def __init__(self,display, x, y, radius, angle, time, v, counter):
         self.x = x
         self.y = y
         self.radius = radius
         self.angle = angle
-        self.time = starttime
+        self.time = time
         self.R = 0
         self.G = 0
         self.B = 0
-        self.R1 = 255
-        self.G1 = 255
-        self.B1 = 255
         self.v = v
-        self.devider = 1*self.v*255*2
+#         self.devider = self.v*255*2
         self.display = display
-        self.liste = liste
+        self.liste = []
         self.counter = counter
 
     def drawstar(self):
@@ -29,23 +26,30 @@ class stars:
 
         else:
             self.time = 1
-            self.x = random.randint(1,1000)
-            self.y = random.randint(1,1000)
+            self.x = randint(1,1000)
+            self.y = randint(1,1000)
 
-    def bright(self):
-        if self.time > 0.5 and self.R< 250:
-            self.R += self.devider
-            self.G += self.devider
-            self.B += self.devider
-        elif self.R > 5:
-            self.R -= self.devider
-            self.G -= self.devider
-            self.B -= self.devider
+#     def bright(self):
+#         if self.time > 0.5 and self.R < 250:
+#             self.R += self.devider
+#             self.G += self.devider
+#             self.B += self.devider
+#         elif self.R > 5:
+#             self.R -= self.devider
+#             self.G -= self.devider
+#             self.B -= self.devider
+            
+    def calcBrightness(self):
+        # f(x) = -1020x² + 255
+        self.brightness = -1020 *((self.time-0.5) *(self.time-0.5)) +255 #  <= Quadtratische Funktion
+        self.R = self.brightness
+        self.G = self.brightness
+        self.B = self.brightness
 
-    def drawstars(self):
-        if len(self.liste)<200:
-            if self.counter>20:
-                star = stars(self.display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001,[],0)
+    def addStarIfNotEnough(self):
+        if len(self.liste) < 200:
+            if self.counter > 20:
+                star = stars(self.display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 0.001, 0)
                 self.liste.append(star)
                 self.counter = 0
             else:
@@ -55,4 +59,4 @@ class stars:
         for star in self.liste:
             star.drawstar()
             star.timer()
-            star.bright()
+            star.calcBrightness()

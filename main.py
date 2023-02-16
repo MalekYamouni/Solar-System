@@ -18,10 +18,6 @@ FPS = 120
 # Beschleunigung
 
 def main():
-    # Planeten Objekte
-    #Sonne = planeten(display,SCREENSIZE/2, SCREENSIZE/2, 0, 70, (200, 100, 0),0,0,0, SCREENSIZE)
-    #Erde = planeten(display,SCREENSIZE/2-50, SCREENSIZE/2-50, 0.001, 15, "green", 23.5, 23.5, 1, SCREENSIZE)
-
     # Images werden geladen und in eine Variable gepackt
     sprite_sheet_image = pygame.image.load('earth.png').convert_alpha()
     sprite_sheet_earth = Spritesheet(sprite_sheet_image)
@@ -29,10 +25,7 @@ def main():
     sprite_sheet_image = pygame.image.load('Sun.png').convert_alpha()
     sprite_sheet_sun = Spritesheet(sprite_sheet_image)
 
-    # Hintergrund
-    BLACK = (0,0,0)
-
-    # Animation 
+    # Animation Objekte
     sun = Animation(display, [], 11, 90, 0, sprite_sheet_sun, 1, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
     sun.animate()
 
@@ -60,6 +53,7 @@ def main():
         star.drawstars()
 
         # erzeugt den Schweif hinter dem Planeten
+        #earthtail.drawparticle()
         earthtail.drawtail2()
 
         # visualisiert die Objekte

@@ -17,9 +17,9 @@ class Tail:
 
     def brightness(self):
         if self.R> 0:
-            self.R -= 0.1
-            self.G -= 0.1
-            self.B -= 0.1
+            self.R -= 0.4
+            self.G -= 0.4
+            self.B -= 0.4
 
     def getx(self):
         self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE/2
@@ -32,25 +32,14 @@ class Tail:
         return self.currenty
 
     def drawparticle(self):
-        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.x),radius=self.radius)
-
-    # def drawtail(self):
-    #     tailor = Tail(self.display, self.taillist, self.radius, self.angle, self.v, self.x, self.y, self.SCREENSIZE, 0 )
-    #     self.taillist.append(tailor)
-    #     if len(self.taillist)<500:
-    #         for i in self.taillist:
-    #             i.drawparticle()
-    #             i.brightness()
-    #             if i.R < 1:
-    #                 del self.taillist[0]
+        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.getx(),self.gety()),radius=self.radius)
 
     def drawtail2(self):
-        if len(self.taillist)<200:
+        if len(self.taillist)<500:
             if self.counter<200:
                 tailor = Tail(self.display, self.taillist, self.radius, self.angle, self.x, self.y, self.SCREENSIZE, 0)
                 self.taillist.append(tailor)
                 self.counter += 1
-                print(self.counter)
             else:
                 self.counter += 0
 

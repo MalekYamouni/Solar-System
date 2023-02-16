@@ -28,32 +28,19 @@ class Animation:
             self.last_update = current_time
             if self.frame >= len(self.animation_list):
                 self.frame = 0
+
         self.angle += 0.01
         if self.angle >= 6.3:
             self.angle -= 6.3
 
-        self.angle += 0.002
-        if self.angle >= 6.3:
-            self.angle = -6.3
-
     def getx(self):
-<<<<<<< HEAD
         self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE/2
-        self.currentx -=24
+        self.currentx -= 36
         return self.currentx
 
     def gety(self):
         self.currenty = self.y*math.sin(self.angle)+self.SCREENSIZE/2
-        self.currenty -= 24
-=======
-        self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5
-        self.currentx -= 25
-        return self.currentx
-
-    def gety(self):
-        self.currenty = self.y*math.sin(self.angle)+self.SCREENSIZE*0.5
-        self.currenty -= 25
->>>>>>> 2f9d83fada5c7fed168be44b60a464d0d1943e41
+        self.currenty -= 36
         return self.currenty
 
     def showstatic(self):

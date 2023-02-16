@@ -54,10 +54,6 @@ def main():
         # erzeugt den Schweif hinter dem Planeten
         earthTail.newParticle(display, SCREENSIZE-24)
         earthTail.update()
-<<<<<<< HEAD
-=======
-    
->>>>>>> 2f9d83fada5c7fed168be44b60a464d0d1943e41
 
         # visualisiert die Objekte
         sun.showstatic()

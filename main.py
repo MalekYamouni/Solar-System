@@ -31,7 +31,7 @@ def main():
     earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2), (SCREENSIZE/2), 0, SCREENSIZE)
     earth.animate()
 
-    star = stars(display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), randint(0,1), 0.001, [] , 0)
+    star = stars(display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 1, 0.001, 0)
 
     earthTail = Tail()
     

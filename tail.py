@@ -2,6 +2,8 @@ import pygame
 import math
 
 class TailParticle:
+    
+    
     def __init__(self,display, taillist, radius, angle, x, y, SCREENSIZE, counter) -> None:
         self.taillist = taillist
         self.radius = radius
@@ -25,8 +27,6 @@ class TailParticle:
     def calcPos(self):
         self.x = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5
         self.y = self.y*math.sin(self.angle)+self.SCREENSIZE*0.5
-
-
 
     def draw(self):
         pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
@@ -52,14 +52,6 @@ class Tail:
         particle = TailParticle(display,[],1, self.angle, SCREENSIZE*0.5, SCREENSIZE*0.5, SCREENSIZE, 0)
         self.particles.append(particle)
         self.updateAngle()
-
-
-    def update(self):
-        for i in self.particles:
-            i.update()
-            if i.R < 1:
-                del self.particles[0]
-    
 
     def updateAngle(self):
         self.angle += 0.01

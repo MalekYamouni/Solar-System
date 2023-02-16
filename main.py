@@ -1,6 +1,5 @@
 import pygame
 import random
-from planet import planeten
 from Image import Spritesheet
 from Stars import stars
 from animation import Animation
@@ -29,7 +28,7 @@ def main():
     sun = Animation(display, [], 11, 90, 0, sprite_sheet_sun, 1, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
     sun.animate()
 
-    earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
+    earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2), (SCREENSIZE/2), 0, SCREENSIZE)
     earth.animate()
 
     star = stars(display,random.randint(1,1000),random.randint(1,1000), random.randint(1,3),random.randint(1,360),random.randint(0,1),0.001,[],0)
@@ -55,8 +54,7 @@ def main():
         # erzeugt den Schweif hinter dem Planeten
         earthTail.newParticle(display, SCREENSIZE)
         earthTail.update()
-        #earthtail.drawparticle()
-        # earthtail.drawtail2()
+    
 
         # visualisiert die Objekte
         sun.showstatic()

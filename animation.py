@@ -33,11 +33,13 @@ class Animation:
             self.angle = 0
 
     def getx(self):
-        self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE/2
+        self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5
+        self.currentx -= 25
         return self.currentx
 
     def gety(self):
-        self.currenty = self.y*math.sin(self.angle)+self.SCREENSIZE/2
+        self.currenty = self.y*math.sin(self.angle)+self.SCREENSIZE*0.5
+        self.currenty -= 25
         return self.currenty
 
     def showstatic(self):

@@ -18,10 +18,10 @@ FPS = 120
 
 def main():
     # Images werden geladen und in eine Variable gepackt
-    sprite_sheet_image = pygame.image.load('Sonnensystem/earth.png').convert_alpha()
+    sprite_sheet_image = pygame.image.load('earth.png').convert_alpha()
     sprite_sheet_earth = Spritesheet(sprite_sheet_image)
 
-    sprite_sheet_image = pygame.image.load('Sonnensystem/Sun.png').convert_alpha()
+    sprite_sheet_image = pygame.image.load('Sun.png').convert_alpha()
     sprite_sheet_sun = Spritesheet(sprite_sheet_image)
 
     # Animation Objekte
@@ -54,7 +54,6 @@ def main():
         # erzeugt den Schweif hinter dem Planeten
         earthTail.newParticle(display, SCREENSIZE)
         earthTail.update()
-    
 
         # visualisiert die Objekte
         sun.showstatic()

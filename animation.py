@@ -28,6 +28,7 @@ class Animation:
             self.last_update = current_time
             if self.frame >= len(self.animation_list):
                 self.frame = 0
+
         self.angle += 0.01
         if self.angle >= 6.3:
             self.angle -= 6.3

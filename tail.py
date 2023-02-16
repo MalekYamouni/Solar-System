@@ -67,5 +67,5 @@ class Tail:
         self.angle += 0.001
         self.angle += 0.01
         if self.angle >= 6.3:
-            self.angle = 0
+            self.angle -= 6.3
 

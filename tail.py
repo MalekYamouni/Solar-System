@@ -14,6 +14,7 @@ class TailParticle:
         self.y = y
         self.SCREENSIZE =SCREENSIZE
         self.counter = counter
+        self.calcPos()
 
     def reduceBrightness(self):
         if self.R > 0:
@@ -21,17 +22,14 @@ class TailParticle:
             self.G -= 0.4
             self.B -= 0.4
 
-    def getx(self):
-        self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5
-        return self.currentx
+    def calcPos(self):
+        self.x = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5
+        self.y = self.y*math.sin(self.angle)+self.SCREENSIZE*0.5
 
-    def gety(self):
-        self.currenty = self.y*math.sin(self.angle)+self.SCREENSIZE*0.5
-        return self.currenty
 
 
     def draw(self):
-        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.getx(),self.gety()),radius=self.radius)
+        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
 
     def update(self):
         self.draw()

@@ -13,7 +13,6 @@ class TailParticle:
         self.G = 255
         self.B = 255
         self.center = SCREENSIZE * 0.5
-        self.counter = counter
         self.calcPos()
 
     def reduceBrightness(self):

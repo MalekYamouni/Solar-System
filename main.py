@@ -49,7 +49,7 @@ def main():
         earth.update()
 
         # Sterne werden Random erzeugt
-        star.drawstars()
+        star.addStarIfNotEnough()
 
         # erzeugt den Schweif hinter dem Planeten
         earthTail.newParticle(display, SCREENSIZE)

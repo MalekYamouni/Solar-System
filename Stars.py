@@ -12,7 +12,6 @@ class stars:
         self.G = 0
         self.B = 0
         self.v = v
-#         self.devider = self.v*255*2
         self.display = display
         self.liste = []
         self.counter = counter
@@ -28,16 +27,6 @@ class stars:
             self.time = 1
             self.x = randint(1,1000)
             self.y = randint(1,1000)
-
-#     def bright(self):
-#         if self.time > 0.5 and self.R < 250:
-#             self.R += self.devider
-#             self.G += self.devider
-#             self.B += self.devider
-#         elif self.R > 5:
-#             self.R -= self.devider
-#             self.G -= self.devider
-#             self.B -= self.devider
             
     def calcBrightness(self):
         # f(x) = -1020x² + 255
@@ -55,7 +44,8 @@ class stars:
             else:
                 self.counter += 1
                 
-        # Sterne werden gezeichnet haben einen timer, wenn timer 0 erreicht wird das Objekt gelöscht
+    def update(self):
+        # Sterne werden gezeichnet haben einen timer, wenn timer 0 erreicht wird das Objekt versetzt
         for star in self.liste:
             star.drawstar()
             star.timer()

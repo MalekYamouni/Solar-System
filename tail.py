@@ -2,7 +2,9 @@ import pygame
 import math
 
 class TailParticle:
-    def __init__(self,display, taillist, radius, angle, x, y, SCREENSIZE, counter) -> None:
+
+
+    def __init__(self, display, radius, angle, SCREENSIZE):
         self.taillist = taillist
         self.radius = radius
         self.angle = angle
@@ -10,10 +12,8 @@ class TailParticle:
         self.R = 255
         self.G = 255
         self.B = 255
-        self.x = x
-        self.y = y
-        self.SCREENSIZE =SCREENSIZE
-        self.counter = counter
+        self.center = SCREENSIZE * 0.5
+        self.calcPos()
 
     def reduceBrightness(self):
         if self.R > 0:
@@ -21,21 +21,17 @@ class TailParticle:
             self.G -= 0.4
             self.B -= 0.4
 
-    def getx(self):
-        self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5
-        return self.currentx
-
-    def gety(self):
-        self.currenty = self.y*math.sin(self.angle)+self.SCREENSIZE*0.5
-        return self.currenty
-
+    def calcPos(self):
+        self.x = self.center*math.cos(self.angle)+self.center
+        self.y = self.center*math.sin(self.angle)+self.center
 
     def draw(self):
-        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.getx(),self.gety()),radius=self.radius)
+        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
 
     def update(self):
         self.draw()
         self.reduceBrightness()
+
 
 class Tail:
 
@@ -51,17 +47,9 @@ class Tail:
                 del self.particles[0]
 
     def newParticle(self, display, SCREENSIZE):
-        particle = TailParticle(display,[],1, self.angle, SCREENSIZE*0.5, SCREENSIZE*0.5, SCREENSIZE, 0)
+        particle = TailParticle(display, 1, self.angle, SCREENSIZE)
         self.particles.append(particle)
-        self.updateAngle()
-
-
-    def update(self):
-        for i in self.particles:
-            i.update()
-            if i.R < 1:
-                del self.particles[0]
-    
+        self.updateAngle()  
 
     def updateAngle(self):
         self.angle += 0.01

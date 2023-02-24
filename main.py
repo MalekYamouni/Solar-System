@@ -31,7 +31,7 @@ def main():
     # Planetenobjekte
     sun = Animation(display, [], 11, 90, 0, sprite_sheet_sun, 1, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
     sun.animate()
-    earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, (SCREENSIZE/2), (SCREENSIZE/2), 0, SCREENSIZE)
+    earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, 500, 500, 0, SCREENSIZE)
     earth.animate()
 
     # Sternobjekte 

@@ -2,10 +2,7 @@ import pygame
 import math
 
 class TailParticle:
-
-
     def __init__(self, display, radius, angle, SCREENSIZE):
-        self.taillist = taillist
         self.radius = radius
         self.angle = angle
         self.display = display
@@ -17,9 +14,9 @@ class TailParticle:
 
     def reduceBrightness(self):
         if self.R > 0:
-            self.R -= 0.4
-            self.G -= 0.4
-            self.B -= 0.4
+            self.R -= 0.5
+            self.G -= 0.5
+            self.B -= 0.5
 
     def calcPos(self):
         self.x = self.center*math.cos(self.angle)+self.center
@@ -34,8 +31,6 @@ class TailParticle:
 
 
 class Tail:
-
-
     def __init__(self):
         self.particles = []
         self.angle = 0
@@ -52,6 +47,6 @@ class Tail:
         self.updateAngle()  
 
     def updateAngle(self):
-        self.angle += 0.01
+        self.angle += 0.003
         if self.angle >= 6.3:
             self.angle -= 6.3

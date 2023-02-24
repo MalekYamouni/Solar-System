@@ -19,6 +19,7 @@ class stars:
     def drawstar(self):
         pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
 
+    # timer wird runtergezählt und wenn er 0 erreicht reset auf 1.
     def timer(self):
         if self.time>=0:
             self.time -= self.v
@@ -35,6 +36,7 @@ class stars:
         self.G = self.brightness
         self.B = self.brightness
 
+    # Sternobjekte werden in Liste Konstant wieder eingefügt nachdem sie gelöscht werden wenn deren RGB Wert auf 0 sinkt
     def addStarIfNotEnough(self):
         if len(self.liste) < 200:
             if self.counter > 20:

@@ -38,7 +38,7 @@ class stars:
     def addStarIfNotEnough(self):
         if len(self.liste) < 200:
             if self.counter > 20:
-                star = stars(self.display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 0.001, 0)
+                star = stars(self.display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 1, 0.001, 0)
                 self.liste.append(star)
                 self.counter = 0
             else:

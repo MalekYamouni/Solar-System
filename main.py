@@ -35,7 +35,7 @@ def main():
     earth.animate()
 
     # Sternobjekte 
-    stard = stars(display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 1, 0.001, 0)
+    Stars = stars(display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 1, 0.001, 0)
 
     # Schweifobjekte
     earthTail = Tail()
@@ -47,16 +47,16 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        #update background
+        # update background
         display.fill((0,0,0))
 
         # Objekt iteriert durch die Liste
         sun.update()
         earth.update()
-        stard.update()
+        Stars.update()
 
         # Sterne werden Random erzeugt
-        stard.addStarIfNotEnough()
+        Stars.addStarIfNotEnough()
 
         # erzeugt den Schweif hinter dem Planeten
         earthTail.newParticle(display, SCREENSIZE)

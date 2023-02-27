@@ -28,7 +28,7 @@ class stars:
             self.time = 1
             self.x = randint(1,1000)
             self.y = randint(1,1000)
-            
+    
     def calcBrightness(self):
         # f(x) = -1020x² + 255
         self.brightness = -1020 *((self.time-0.5) *(self.time-0.5)) +255 #  <= Quadtratische Funktion
@@ -47,7 +47,7 @@ class stars:
                 self.counter += 1
                 
     def update(self):
-        # Sterne werden gezeichnet haben einen timer, wenn timer 0 erreicht wird das Objekt versetzt
+        # Sterne werden gezeichnet haben einen timer, wenn timer 0 erreicht wird das Objekt 
         for star in self.liste:
             star.drawstar()
             star.timer()

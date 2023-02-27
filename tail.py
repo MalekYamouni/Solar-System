@@ -45,7 +45,7 @@ class Tail:
         particle = TailParticle(display, 1, self.angle, SCREENSIZE)
         self.particles.append(particle)
         self.updateAngle()  
-
+    #
     def updateAngle(self):
         self.angle += 0.003
         if self.angle >= 6.3:

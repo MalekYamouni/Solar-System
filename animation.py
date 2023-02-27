@@ -17,10 +17,11 @@ class Animation:
         self.angle = angle
         self.SCREENSIZE = SCREENSIZE
 
+    # fügt die Spritesheetobjekte einer Liste hinzu
     def animate(self):
         for x in range(self.animation_steps):
             self.animation_list.append(self.spritesheet.get_image(x, 96, 96, self.scale, self.BG))
-
+    # iteriert durch die Liste 
     def update(self):
         current_time = pygame.time.get_ticks()
         if current_time - self.last_update >= self.animation_cooldown:

@@ -21,7 +21,7 @@ def main():
     mixer.music.load('background.mp3')
     mixer.music.play(loops=-1)
 
-    # Images werden geladen und in eine Variable gepackt
+    # Images werden geladen und das Objekt wird einer Variable zugewiesen 
     sprite_sheet_image = pygame.image.load('C:/Users/TN-35011/Desktop/Malek/Sonnensystem/earth.png').convert_alpha()
     sprite_sheet_earth = Spritesheet(sprite_sheet_image)
 

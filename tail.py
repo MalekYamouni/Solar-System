@@ -19,11 +19,11 @@ class TailParticle:
             self.B -= 0.5
 
     def calcPos(self):
-        self.x = self.center*math.cos(self.angle)+self.center
-        self.y = self.center*math.sin(self.angle)+self.center
+        self.x = self.radius*math.cos(self.angle)+self.center
+        self.y = self.radius*math.sin(self.angle)+self.center
 
     def draw(self):
-        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=self.radius)
+        pygame.draw.circle(self.display, color=(self.R,self.G,self.B), center=(self.x,self.y),radius=1)
 
     def update(self):
         self.draw()
@@ -41,8 +41,8 @@ class Tail:
             if i.R < 1:
                 del self.particles[0]
 
-    def newParticle(self, display, SCREENSIZE):
-        particle = TailParticle(display, 1, self.angle, SCREENSIZE)
+    def newParticle(self, display, radius, angle, SCREENSIZE):
+        particle = TailParticle(display, radius, self.angle, SCREENSIZE)
         self.particles.append(particle)
         self.updateAngle()  
     #

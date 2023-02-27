@@ -21,7 +21,7 @@ class Animation:
     def animate(self):
         for x in range(self.animation_steps):
             self.animation_list.append(self.spritesheet.get_image(x, 96, 96, self.scale, self.BG))
-    # iteriert durch die Liste 
+    # iteriert durch die Liste animation_list um die Koordinate des jeweiligen Orts im Sheet
     def update(self):
         current_time = pygame.time.get_ticks()
         if current_time - self.last_update >= self.animation_cooldown:

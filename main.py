@@ -22,14 +22,17 @@ def main():
     mixer.music.play(loops=-1)
 
     # Images werden geladen und das Objekt wird einer Variable zugewiesen 
-    sprite_sheet_image = pygame.image.load('earth.png').convert_alpha()
-    sprite_sheet_earth = Spritesheet(sprite_sheet_image)
+    sprite_sheet_image1 = pygame.image.load('earth.png').convert_alpha()
+    sprite_sheet_earth = Spritesheet(sprite_sheet_image1)
 
-    sprite_sheet_image = pygame.image.load('Sun.png').convert_alpha()
-    sprite_sheet_sun = Spritesheet(sprite_sheet_image)
+    sprite_sheet_image2 = pygame.image.load('sun.png').convert_alpha()
+    sprite_sheet_sun = Spritesheet(sprite_sheet_image2)
 
-    sprite_sheet_image = pygame.image.load('Venus.png').convert_alpha()
-    sprite_sheet_venus = Spritesheet(sprite_sheet_image)
+    sprite_sheet_image3 = pygame.image.load('venus.png').convert_alpha()
+    sprite_sheet_venus = Spritesheet(sprite_sheet_image3)
+
+    sprite_sheet_image4 = pygame.image.load('merkur.png').convert_alpha()
+    sprite_sheet_merkur = Spritesheet(sprite_sheet_image4)
 
     # Planetenobjekte
     sun = Animation(display, [], 11, 90, 0, sprite_sheet_sun, 1, (SCREENSIZE/2)-48, (SCREENSIZE/2)-48, 0, SCREENSIZE)
@@ -38,15 +41,19 @@ def main():
     earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, 400, 400, 0, SCREENSIZE)
     earth.animate()
 
-    venus = Animation(display, [], 90, 50, 0, sprite_sheet_venus, 2, 300, 300, 0, SCREENSIZE)
+    venus = Animation(display, [], 90, 50, 0, sprite_sheet_venus, 2, 300, 300, 90, SCREENSIZE)
     venus.animate()
+
+    merkur = Animation(display, [], 30, 50, 0, sprite_sheet_merkur, 2.8, 200, 200, 180, SCREENSIZE)
+    merkur.animate()
 
     # Sternobjekte 
     Stars = stars(display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 1, 0.001, 0)
 
     # Schweifobjekte
-    earthTail = Tail()
-    venusTail = Tail()
+    earthTail = Tail(0)
+    venusTail = Tail(90)
+    merkurTail = Tail(180)
     
 
     while True:
@@ -62,22 +69,27 @@ def main():
         sun.update()
         earth.update()
         venus.update()
+        merkur.update()
         Stars.update()
 
         # Sterne werden Random erzeugt
         Stars.addStarIfNotEnough()
 
         # erzeugt den Schweif hinter dem Planeten
-        earthTail.newParticle(display, 400, 0, SCREENSIZE)
+        earthTail.newParticle(display, 400, 90, SCREENSIZE)
         earthTail.update()
 
-        venusTail.newParticle(display, 300, 0, SCREENSIZE)
+        venusTail.newParticle(display, 300, 90, SCREENSIZE)
         venusTail.update()
+
+        merkurTail.newParticle(display, 200, 90, SCREENSIZE)
+        merkurTail.update()
 
         # visualisiert die Objekte
         sun.showstatic()
         earth.showmoving()
         venus.showmoving()
+        merkur.showmoving()
 
         pygame.display.update()
         clock.tick(FPS)

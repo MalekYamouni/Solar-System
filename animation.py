@@ -31,8 +31,8 @@ class Animation:
                 self.frame = 0
 
         self.angle += 0.003
-        if self.angle >= 6.3:
-            self.angle -= 6.3
+        if self.angle >= math.pi*2:
+            self.angle -= math.pi*2
 
     def getx(self):
         self.currentx = self.x*math.cos(self.angle)+self.SCREENSIZE*0.5

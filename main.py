@@ -1,4 +1,5 @@
 import pygame
+from math import pi
 from pygame import mixer
 from random import randint
 from Image import Spritesheet
@@ -41,19 +42,19 @@ def main():
     earth = Animation(display, [], 48, 50, 0, sprite_sheet_earth, 2, 400, 400, 0, SCREENSIZE)
     earth.animate()
 
-    venus = Animation(display, [], 90, 50, 0, sprite_sheet_venus, 2, 300, 300, 90, SCREENSIZE)
+    venus = Animation(display, [], 89, 50, 0, sprite_sheet_venus, 2, 400, 400, pi, SCREENSIZE)
     venus.animate()
 
-    merkur = Animation(display, [], 30, 50, 0, sprite_sheet_merkur, 2.8, 200, 200, 180, SCREENSIZE)
-    merkur.animate()
+    # merkur = Animation(display, [], 30, 50, 0, sprite_sheet_merkur, 2.8, 200, 200, 180, SCREENSIZE)
+    # merkur.animate()
 
     # Sternobjekte 
     Stars = stars(display, randint(1,1000), randint(1,1000), randint(1,3), randint(1,360), 1, 0.001, 0)
 
     # Schweifobjekte
     earthTail = Tail(0)
-    venusTail = Tail(90)
-    merkurTail = Tail(180)
+    venusTail = Tail(pi)
+    # merkurTail = Tail(180)
     
 
     while True:
@@ -69,7 +70,7 @@ def main():
         sun.update()
         earth.update()
         venus.update()
-        merkur.update()
+        # merkur.update()
         Stars.update()
 
         # Sterne werden Random erzeugt
@@ -79,17 +80,17 @@ def main():
         earthTail.newParticle(display, 400, 90, SCREENSIZE)
         earthTail.update()
 
-        venusTail.newParticle(display, 300, 90, SCREENSIZE)
+        venusTail.newParticle(display, 400, 90, SCREENSIZE)
         venusTail.update()
 
-        merkurTail.newParticle(display, 200, 90, SCREENSIZE)
-        merkurTail.update()
+        # merkurTail.newParticle(display, 200, 90, SCREENSIZE)
+        # merkurTail.update()
 
         # visualisiert die Objekte
         sun.showstatic()
         earth.showmoving()
         venus.showmoving()
-        merkur.showmoving()
+        # merkur.showmoving()
 
         pygame.display.update()
         clock.tick(FPS)
